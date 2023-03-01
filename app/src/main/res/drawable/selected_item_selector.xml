@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="16dp"
+    android:insetTop="8dp"
+    android:insetRight="16dp"
+    android:insetBottom="8dp"
+    android:visible="true">
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true" android:drawable="@drawable/selected_item_background" />
+</selector>
+</inset>
