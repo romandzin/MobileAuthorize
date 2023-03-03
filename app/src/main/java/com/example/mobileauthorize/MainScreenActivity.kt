@@ -2,12 +2,10 @@ package com.example.mobileauthorize
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.example.mobileauthorize.databinding.ActivityMainPageBinding
-import com.example.mobileauthorize.databinding.FragmentMainPageBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -47,7 +45,8 @@ class MainScreenActivity : AppCompatActivity() {
 
     private fun loadFragment(fragment: Fragment) {
         val ft: FragmentTransaction = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.fl_content, fragment)
+        ft.replace(R.id.fl_content, fragment, "main")
+        ft.addToBackStack("main")
         ft.commit()
     }
 

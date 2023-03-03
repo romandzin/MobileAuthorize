@@ -1,18 +1,15 @@
 package com.example.mobileauthorize
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.example.mobileauthorize.databinding.ActivityLogInBinding
+import com.example.mobileauthorize.adapters.FlashSaleAdapter
 import com.example.mobileauthorize.databinding.FragmentMainPageBinding
-import com.example.mobileauthorize.viewmodel.AuthorizeViewModel
 import com.example.mobileauthorize.viewmodel.MainViewModel
-import kotlinx.coroutines.launch
+import com.example.model.Product
 
 class MainPageFragment : Fragment() {
 
@@ -38,12 +35,18 @@ class MainPageFragment : Fragment() {
             categoryRecyclerView.adapter = it
         }
         mainViewModel.getLatestProductAdapter()
-        mainViewModel.getFlashSaleProductAdapter()
+        mainViewModel.getFlashSaleProductList()
         mainViewModel.latestAdapter.observe(viewLifecycleOwner) {
-                latestRecyclerView.adapter = it
+            latestRecyclerView.adapter = it
         }
-        mainViewModel.flashSaleAdapter.observe(viewLifecycleOwner) {
-            flashSaleRecyclerView.adapter = it
+        mainViewModel.flashSaleProductList.observe(viewLifecycleOwner) { productList ->
+            flashSaleRecyclerView.adapter =
+                this.activity?.supportFragmentManager?.let { fragmentManager ->
+                    FlashSaleAdapter(
+                        productList as ArrayList<Product>,
+                        fragmentManager
+                    )
+                }
         }
     }
 }

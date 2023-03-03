@@ -1,10 +1,9 @@
 package com.example.mobileauthorize
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.mobileauthorize.databinding.ActivityLogInBinding
@@ -15,6 +14,7 @@ class LogInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLogInBinding
     lateinit var loginViewModel: AuthorizeViewModel
+    lateinit var firstName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +34,13 @@ class LogInActivity : AppCompatActivity() {
                 }
                 else {
                     val intent = Intent(this, MainScreenActivity::class.java)
+                    intent.putExtra("name", firstName)
                     startActivity(intent)
                 }
             }
             lifecycleScope.launch {
-                loginViewModel.onLogInClicked(binding.firstNameField.text.toString())
+                firstName = binding.firstNameField.text.toString()
+                loginViewModel.onLogInClicked(firstName)
             }
         }
     }

@@ -15,4 +15,7 @@
     <color name="search_view_background">#F5F6F6</color>
     <color name="item_button_color">#C4C4C4D9</color>
     <color name="red">#F93A3A</color>
+    <color name="cart_element_color">#E5E9EF</color>
+    <color name="black_100">#181726</color>
+    <color name="violet">#99A0FF</color>
 </resources>

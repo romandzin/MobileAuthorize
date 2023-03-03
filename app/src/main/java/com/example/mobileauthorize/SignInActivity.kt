@@ -2,23 +2,20 @@ package com.example.mobileauthorize
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.mobileauthorize.databinding.ActivitySignInBinding
 import com.example.mobileauthorize.viewmodel.AuthorizeViewModel
-import com.example.model.User
 import kotlinx.coroutines.launch
 
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
     lateinit var loginViewModel: AuthorizeViewModel
+    lateinit var firstName: String
 
     lateinit var logInText: TextView
 
@@ -46,13 +43,17 @@ class SignInActivity : AppCompatActivity() {
                 }
                 else {
                     val intent = Intent(this, MainScreenActivity::class.java)
+                    intent.putExtra("name", firstName)
                     startActivity(intent)
                 }
             }
             lifecycleScope.launch {
-                loginViewModel.onSignInClicked(binding.firstNameField.text.toString(),
+                firstName = binding.firstNameField.text.toString()
+                loginViewModel.onSignInClicked(
+                    firstName,
                     binding.lastNameField.text.toString(),
-                    binding.emailField.text.toString())
+                    binding.emailField.text.toString()
+                )
             }
         }
     }
